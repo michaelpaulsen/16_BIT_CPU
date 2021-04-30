@@ -1,0 +1,11 @@
+*.ipch
+*.pdb 
+*.vcxproj
+*.filters
+*.tlog
+*.suo
+*.db
+*.sln
+*.user
+Debug/
+
