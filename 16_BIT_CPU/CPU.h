@@ -17,7 +17,17 @@ public:
 private:
 	std::array<Register<D_WORD_SIZE>, 5> register_list; //A X ETA ETX 
 	Memory<D_LONG_SIZE> RAM = Memory<D_LONG_SIZE>(MEM_MAX_BOUNDS);
-	bool bCPUHalted = false;
+	bool bCPUHalted = false;	
+	bool bMemoryCheck(D_LONG_SIZE addr) {
+		if (addr > RAM.GET_MAX_INDEX()) {
+			///if the given pointer is out of memory space then "throw" the an out of bounds exeption 
+			this->register_list[4] |= 1 << 1; //set the error flag 
+			return false;
+		}
+		else {
+			return true; 
+		}
+	}
 public:
 	/**
 	* ADD Functions to add a const to a reg and to add a reg to a reg 
