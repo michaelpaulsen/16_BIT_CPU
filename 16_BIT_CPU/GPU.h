@@ -8,7 +8,7 @@ typedef uint16_t D_LONG_SIZE; //Long size should be 2 word size
 
 
 
-class GPU
+class CPU
 {
 public:
 	static const long MEM_MAX_BOUNDS = 1024 * 32 / (8 * sizeof(D_WORD_SIZE));
