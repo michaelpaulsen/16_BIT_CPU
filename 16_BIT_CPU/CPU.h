@@ -51,14 +51,10 @@ public:
 		this->register_list[0].loadReg(value);
 	}
 	void LDA(D_LONG_SIZE PNTR) {
-		/// to do implemnt memory access 
-		if (PNTR > RAM.GET_MAX_INDEX()) {
-			///if the given pointer is out of memory space then "throw" the an out of bounds exeption 
-			this->register_list[4] |= 1 << 1; //set the error flag 
-			return; 
-		}
+		if(bMemoryCheck(PNTR)){ 
 		/// if its not then get the memeory and set the a reg to it 
 		this->register_list[0].loadReg(RAM.readAddr(PNTR));
+		}
 	}
 	void STA(D_LONG_SIZE addr) {
 		RAM.setAddr(addr,  this->register_list[0].GetRegValue()); 
@@ -76,13 +72,9 @@ public:
 	}
 	void LDX(D_LONG_SIZE PNTR) {
 		/// to do implemnt memory access 
-		if (PNTR > RAM.GET_MAX_INDEX()) {
-			///if the given pointer is out of memory space then "throw" the an out of bounds exeption 
-			this->register_list[1] |= 1 << 1; //set the error flag 
-			return;
+		if (bMemoryCheck(PNTR)) {
+			this->register_list[1].loadReg(RAM.readAddr(PNTR));
 		}
-		/// if its not then get the memeory and set the a reg to it 
-		this->register_list[1].loadReg(RAM.readAddr(PNTR));
 	}
 	void STX(D_LONG_SIZE addr) {
 		RAM.setAddr(addr,  this->register_list[1].GetRegValue());
@@ -100,14 +92,9 @@ public:
 		this->register_list[2].loadReg(value);
 	}
 	void LDY(D_LONG_SIZE PNTR) {
-		/// to do implemnt memory access 
-		if (PNTR > RAM.GET_MAX_INDEX()) {
-			///if the given pointer is out of memory space then "throw" the an out of bounds exeption 
-			this->register_list[4] |= 1 << 1; //set the error flag 
-			return;
+		if (bMemoryCheck(PNTR)) {
+			this->register_list[2].loadReg(RAM.readAddr(PNTR));
 		}
-		/// if its not then get the memeory and set the a reg to it 
-		this->register_list[2].loadReg(RAM.readAddr(PNTR));
 	}
 	void STY(D_LONG_SIZE addr) {
 		RAM.setAddr(addr,  this->register_list[2].GetRegValue());
