@@ -1,5 +1,6 @@
 #pragma once
 #include "Register.h" 
+#include "Memory.h"
 #include <cstdint>
 #include <array>
 #include <bitset>
@@ -11,15 +12,11 @@ typedef uint16_t D_LONG_SIZE; //Long size should be 2 word size
 class CPU
 {
 public:
-	static const long MEM_MAX_BOUNDS = 1024 * 32 / (8 * sizeof(D_WORD_SIZE));
+	static const long MEM_MAX_BOUNDS = 1024 * 32;
 
 private:
 	std::array<Register<D_WORD_SIZE>, 5> register_list; //A X ETA ETX 
-	D_WORD_SIZE* RAM = new D_WORD_SIZE[MEM_MAX_BOUNDS];
-	/*
-	* set up a vertual RAM stick 4GiB of memeory
-	* TODO: make a costome class for this!
-	*/
+	Memory<D_WORD_SIZE> RAM = Memory<D_WORD_SIZE>(MEM_MAX_BOUNDS);
 	bool bCPUHalted = false;
 public:
 	/**
@@ -51,10 +48,10 @@ public:
 			return; 
 		}
 		/// if its not then get the memeory and set the a reg to it 
-		this->register_list[0].loadReg(RAM[PNTR]);
+		this->register_list[0].loadReg(RAM.readAddr(PNTR));
 	}
 	void STA(D_LONG_SIZE addr) {
-		RAM[addr] = this->register_list[0].GetRegValue(); 
+		RAM.setAddr(addr,  this->register_list[0].GetRegValue()); 
 	}
 
 	/** X REG OPERATIONS */
@@ -75,10 +72,10 @@ public:
 			return;
 		}
 		/// if its not then get the memeory and set the a reg to it 
-		this->register_list[1].loadReg(RAM[PNTR]);
+		this->register_list[1].loadReg(RAM.readAddr(PNTR));
 	}
 	void STX(D_LONG_SIZE addr) {
-		RAM[addr] = this->register_list[1].GetRegValue();
+		RAM.setAddr(addr,  this->register_list[1].GetRegValue());
 	}
 
 
@@ -100,10 +97,10 @@ public:
 			return;
 		}
 		/// if its not then get the memeory and set the a reg to it 
-		this->register_list[2].loadReg(RAM[PNTR]);
+		this->register_list[2].loadReg(RAM.readAddr(PNTR));
 	}
 	void STY(D_LONG_SIZE addr) {
-		RAM[addr] = this->register_list[2].GetRegValue();
+		RAM.setAddr(addr,  this->register_list[2].GetRegValue());
 	}
 	
 	/**Z REG OPERATIONS
