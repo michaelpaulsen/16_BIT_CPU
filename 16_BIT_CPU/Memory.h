@@ -1,20 +1,25 @@
 #pragma once
+#define NULL_MEMORY 0xff 
 template <class DWORDSIZE> class Memory
 {
 	DWORDSIZE* addressSpace; 
 	DWORDSIZE max_addr; 
 public : 
-	Memory(DWORDSIZE size) /// make a memory modual with size bits 
-	{
-		max_addr = size / (8 * sizeof(DWORDSIZE);
-		addressSpace = new DWORDSIZE[max_addr];
-		 
+	Memory(DWORDSIZE size){
+		/// make a memory modual with size bits 
+
+		max_addr = size / (8 * sizeof(DWORDSIZE));
+		addressSpace = new DWORDSIZE[max_addr];	 
 	}
-	Memory(Memory&) = default; /// shouldn't be needed but want to keep them so that the compiler can optimse when possible
-	Memory(Memory&&) = default; 
+
+
+	Memory(Memory&) = default; 
+	Memory(Memory&&) = default;
+	/// the copy constructor and the forward referance constructor shouldn't ever be used but they are kept
+	/// so that the compiler can optimize.
 
 	~Memory() { //clean up 
-		delete[] addressSpace
+		delete[] addressSpace;
 	}
 	void setAddr(DWORDSIZE addr, DWORDSIZE value) {
 		if (addr >= this->max_addr) { 
@@ -28,10 +33,7 @@ public :
 		if (addr >= this->max_addr) {
 			/// should never be true because the cpu should error chek before making this call 
 			/// but I wrote this just incase there's an error in hte way that the cpu makes its read calls
-
-			return; 
-			/// returning void from non-void function may cause undifined behavior but this is fine
-			/// because if this is use properly this line should never be acssesed 
+			return NULL_MEMORY; 
 		}
 		return this->addressSpace[addr]; 
 	}
