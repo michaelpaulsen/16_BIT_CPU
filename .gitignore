@@ -9,3 +9,6 @@
 *.user
 Debug/
 
+*.opendb
+*.db-shm
+*.db-wal
