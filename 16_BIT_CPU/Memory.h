@@ -35,5 +35,8 @@ public :
 		}
 		return this->addressSpace[addr]; 
 	}
+	DWORDSIZE GET_MAX_INDEX() {
+		return this->max_addr; 
+	}
 };
 
