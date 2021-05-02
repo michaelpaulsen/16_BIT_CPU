@@ -16,7 +16,7 @@ public:
 
 private:
 	std::array<Register<D_WORD_SIZE>, 5> register_list; //A X ETA ETX 
-	Memory<D_WORD_SIZE> RAM = Memory<D_WORD_SIZE>(MEM_MAX_BOUNDS);
+	Memory<D_LONG_SIZE> RAM = Memory<D_LONG_SIZE>(MEM_MAX_BOUNDS);
 	bool bCPUHalted = false;
 public:
 	/**
