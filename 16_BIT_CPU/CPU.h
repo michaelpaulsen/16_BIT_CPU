@@ -42,7 +42,7 @@ public:
 	}
 	void LDA(D_LONG_SIZE PNTR) {
 		/// to do implemnt memory access 
-		if (PNTR > MEM_MAX_BOUNDS) {
+		if (PNTR > RAM.GET_MAX_INDEX()) {
 			///if the given pointer is out of memory space then "throw" the an out of bounds exeption 
 			this->register_list[4] |= 1 << 1; //set the error flag 
 			return; 
@@ -66,7 +66,7 @@ public:
 	}
 	void LDX(D_LONG_SIZE PNTR) {
 		/// to do implemnt memory access 
-		if (PNTR > MEM_MAX_BOUNDS) {
+		if (PNTR > RAM.GET_MAX_INDEX()) {
 			///if the given pointer is out of memory space then "throw" the an out of bounds exeption 
 			this->register_list[1] |= 1 << 1; //set the error flag 
 			return;
@@ -91,7 +91,7 @@ public:
 	}
 	void LDY(D_LONG_SIZE PNTR) {
 		/// to do implemnt memory access 
-		if (PNTR > MEM_MAX_BOUNDS) {
+		if (PNTR > RAM.GET_MAX_INDEX()) {
 			///if the given pointer is out of memory space then "throw" the an out of bounds exeption 
 			this->register_list[4] |= 1 << 1; //set the error flag 
 			return;
@@ -104,7 +104,7 @@ public:
 	}
 	
 	/**Z REG OPERATIONS
-	*TODO ADD Z REG 
+	*TODO: ADD Z REG 
 	*/
 
 };
