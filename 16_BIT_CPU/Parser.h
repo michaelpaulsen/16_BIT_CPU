@@ -20,8 +20,8 @@ public:
 private:
 
 	std::regex parseIntCmd    = std::regex("([A-Z]*)([\\s@])([-+])(\\d\\d*)$");
-	std::regex parseRegCmd    = std::regex("([A-Z]*)\\s([AXYZ])$");
 	std::regex parseIntIntCmd = std::regex("([A-Z]*)([\\s@])([-+])(\\d\\d*)[, ]([-+])(\\d\\d*)$");
+	std::regex parseRegCmd = std::regex("([A-Z]*)\\s([AXYZ])$");
 	std::regex parseRegIntCmd = std::regex("([A-Z]*)\\s([AXYZ])[, ]([-+])(\\d\\d*)$");
 	std::regex parseRegRegCmd = std::regex("([A-Z]*)\\s([AXYZ])[, ]([AXYZ])$");
 	std::ifstream document;
