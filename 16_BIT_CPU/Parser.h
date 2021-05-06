@@ -11,9 +11,14 @@
 #include <sstream>
 #include <string>
 
+#include "CPU.h" 
 #include "utils.h"
 class Parser
 {
+public: 
+	CPU cpu = CPU(); 
+private:
+
 	std::regex parseIntCmd    = std::regex("([A-Z]*)([\\s@])([-+])(\\d\\d*)$");
 	std::regex parseRegCmd    = std::regex("([A-Z]*)\\s([AXYZ])$");
 	std::regex parseIntIntCmd = std::regex("([A-Z]*)([\\s@])([-+])(\\d\\d*)[, ]([-+])(\\d\\d*)$");
@@ -36,6 +41,14 @@ public:
 			//std::regex_match(ln, data, getCmd);
 			if (std::regex_match(ln, cmdData, parseIntCmd)) { //if the line is a single int line 
 				cmdname = cmdData[0];
+				if (cmdname == "LDA") {
+					if (cmdData[3] >M_INT) {
+						cpu.HLT(2);
+						break;
+					}
+					cpu.LDA(utils::stringToInt(cmdData[3]));
+					
+				}
 			}
 
 		}
