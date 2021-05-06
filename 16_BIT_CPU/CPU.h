@@ -4,8 +4,8 @@
 #include <cstdint>
 #include <array>
 #include <bitset>
-typedef  uint8_t D_WORD_SIZE; // word size 
-typedef uint16_t D_LONG_SIZE; //Long size should be 2 word size 
+typedef char D_WORD_SIZE; // word size 
+typedef  int D_LONG_SIZE; //Long size should be 2 word size 
 
 
 
