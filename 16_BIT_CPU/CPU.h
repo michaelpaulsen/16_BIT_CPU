@@ -4,6 +4,8 @@
 #include <cstdint>
 #include <array>
 #include <bitset>
+#define M_INT  254
+#define M_LONG 65534
 typedef char D_WORD_SIZE; // word size 
 typedef  int D_LONG_SIZE; //Long size should be 2 word size 
 
