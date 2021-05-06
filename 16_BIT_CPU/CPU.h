@@ -29,6 +29,14 @@ private:
 		}
 	}
 public:
+	void HLT() {
+		this->bCPUHalted = true; 
+	}
+	void HLT(D_WORD_SIZE bmask) {
+		this->register_list[4] |= bmask; 
+		this->bCPUHalted = true; 
+	}
+
 	/**
 	* ADD Functions to add a const to a reg and to add a reg to a reg 
 	*/
